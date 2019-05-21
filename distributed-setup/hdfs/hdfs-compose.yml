@@ -1,0 +1,127 @@
+---
+version: '2.2'
+
+services:
+  #---------------------------------------------------------------------------#
+  # RADAR Cold Storage                                                        #
+  #---------------------------------------------------------------------------#
+  hdfs-datanode-1:
+    build:
+      context: ./images/hdfs
+      args:
+        BASE_VERSION: ${HDFS_BASE_VERSION}
+    image: radarbase/hdfs:${HDFS_BASE_VERSION}
+    hostname: hdfs-datanode-1
+    command: datanode
+    volumes:
+      - "${HDFS_DATA_DIR_1}:/hadoop/dfs/data"
+    restart: always
+    environment:
+      SERVICE_9866_NAME: datanode-1
+      SERVICE_9867_IGNORE: "true"
+      SERVICE_9864_IGNORE: "true"
+      HADOOP_HEAPSIZE: 1000
+      HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
+      HADOOP_DFS_REPLICATION: 2
+    ports:
+      - "9866:9866"
+      - "50010:50010"
+      - "50020:50020"
+      - "50475:50475"
+    extra_hosts:
+      - "hdfs-namenode-1:${TERRAFORM_OPENSTACK_HDFS_NAMENODE_1_STATIC_IP}"
+    healthcheck:
+      test: ["CMD", "hdfs", "dfs", "-test", "-e", "/"]
+      interval: 1m
+      timeout: 15s
+      retries: 3
+
+  hdfs-datanode-2:
+    build:
+      context: ./images/hdfs
+      args:
+        BASE_VERSION: ${HDFS_BASE_VERSION}
+    image: radarbase/hdfs:${HDFS_BASE_VERSION}
+    command: datanode
+    hostname: hdfs-datanode-2
+    volumes:
+      - "${HDFS_DATA_DIR_2}:/hadoop/dfs/data"
+    restart: always
+    environment:
+      SERVICE_9866_NAME: datanode-2
+      SERVICE_9867_IGNORE: "true"
+      SERVICE_9864_IGNORE: "true"
+      HADOOP_HEAPSIZE: 1000
+      HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
+      HADOOP_DFS_REPLICATION: 2
+    ports:
+      - "9867:9866"
+      - "50011:50010"
+      - "50021:50020"
+      - "50476:50475"
+    extra_hosts:
+      - "hdfs-namenode-1:${TERRAFORM_OPENSTACK_HDFS_NAMENODE_1_STATIC_IP}"
+    healthcheck:
+      test: ["CMD", "hdfs", "dfs", "-test", "-e", "/"]
+      interval: 1m
+      timeout: 15s
+      retries: 3
+
+  hdfs-datanode-3:
+    build:
+      context: ./images/hdfs
+      args:
+        BASE_VERSION: ${HDFS_BASE_VERSION}
+    image: radarbase/hdfs:${HDFS_BASE_VERSION}
+    command: datanode
+    hostname: hdfs-datanode-3
+    volumes:
+      - "${HDFS_DATA_DIR_3}:/hadoop/dfs/data"
+    restart: always
+    environment:
+      SERVICE_9866_NAME: datanode-3
+      SERVICE_9867_IGNORE: "true"
+      SERVICE_9864_IGNORE: "true"
+      HADOOP_HEAPSIZE: 1000
+      HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
+      HADOOP_DFS_REPLICATION: 2
+    ports:
+      - "9868:9866"
+      - "50012:50010"
+      - "50022:50020"
+      - "50477:50475"
+    extra_hosts:
+      - "hdfs-namenode-1:${TERRAFORM_OPENSTACK_HDFS_NAMENODE_1_STATIC_IP}"
+    healthcheck:
+      test: ["CMD", "hdfs", "dfs", "-test", "-e", "/"]
+      interval: 1m
+      timeout: 15s
+      retries: 3
+
+  hdfs-namenode-1:
+    build:
+      context: ./images/hdfs
+      args:
+        BASE_VERSION: ${HDFS_BASE_VERSION}
+    image: radarbase/hdfs:${HDFS_BASE_VERSION}
+    command: namenode-1
+    #hostname: hdfs-namenode-1
+    volumes:
+      - "${HDFS_NAME_DIR_1}:/hadoop/dfs/name/1"
+      - "${HDFS_NAME_DIR_2}:/hadoop/dfs/name/2"
+    restart: always
+    environment:
+      SERVICE_8020_NAME: namenode
+      SERVICE_9870_IGNORE: "true"
+      HADOOP_HEAPSIZE: 1000
+      HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
+      HADOOP_DFS_NAME_DIR: file:///hadoop/dfs/name/1,file:///hadoop/dfs/name/2
+    ports:
+      - "8020:8020"
+      - "9870:9870"
+      - "8022:8022"
+    healthcheck:
+      test: ["CMD", "hdfs", "dfs", "-test", "-e", "/"]
+      interval: 1m
+      timeout: 15s
+      retries: 3
