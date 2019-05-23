@@ -2,4 +2,9 @@
 *.tfstate
 *.tfstate.backup
 
+remote-state.tf
+aws-secret.tfvars
+
 .DS_Store
+
+docker/

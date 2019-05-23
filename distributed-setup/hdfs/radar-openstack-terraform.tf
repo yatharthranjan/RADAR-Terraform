@@ -33,7 +33,6 @@ resource "openstack_networking_subnet_v2" "radar-subnet" {
   dns_nameservers = ["8.8.8.8"]
 }
 
-
 resource "openstack_networking_port_v2" "radar-ip" {
   name               = "radar-ip"
   network_id         = "${openstack_networking_network_v2.radar-network.id}"
@@ -57,11 +56,12 @@ resource "openstack_compute_floatingip_associate_v2" "radar-fp-associate" {
 
 resource "openstack_compute_instance_v2" "radar" {
   name            = "radar"
-  image_name      = "centos7"
-  flavor_name     = "m1.small"
+  image_name      = "ubuntu-18.04"
+  flavor_name     = "m1.large"
   key_pair        = "CLOUD_ROSALIND"
+  user_data       = "${data.template_cloudinit_config.cloudinit.rendered}"
   metadata = {
-    this = "network demo"
+    this = "radar"
   }
 
   network {
