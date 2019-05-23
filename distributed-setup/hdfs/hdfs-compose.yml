@@ -7,7 +7,7 @@ services:
   #---------------------------------------------------------------------------#
   hdfs-datanode-1:
     build:
-      context: ./images/hdfs
+      context: ./images/hdfs/
       args:
         BASE_VERSION: ${HDFS_BASE_VERSION}
     image: radarbase/hdfs:${HDFS_BASE_VERSION}
@@ -24,7 +24,7 @@ services:
       HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
       HADOOP_DFS_REPLICATION: 2
     ports:
-      - "9866:9866"
+      - "9864:9864"
       - "50010:50010"
       - "50020:50020"
       - "50475:50475"
@@ -38,7 +38,7 @@ services:
 
   hdfs-datanode-2:
     build:
-      context: ./images/hdfs
+      context: ./images/hdfs/
       args:
         BASE_VERSION: ${HDFS_BASE_VERSION}
     image: radarbase/hdfs:${HDFS_BASE_VERSION}
@@ -55,7 +55,7 @@ services:
       HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
       HADOOP_DFS_REPLICATION: 2
     ports:
-      - "9867:9866"
+      - "9867:9864"
       - "50011:50010"
       - "50021:50020"
       - "50476:50475"
@@ -69,7 +69,7 @@ services:
 
   hdfs-datanode-3:
     build:
-      context: ./images/hdfs
+      context: ./images/hdfs/
       args:
         BASE_VERSION: ${HDFS_BASE_VERSION}
     image: radarbase/hdfs:${HDFS_BASE_VERSION}
@@ -86,7 +86,7 @@ services:
       HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
       HADOOP_DFS_REPLICATION: 2
     ports:
-      - "9868:9866"
+      - "9868:9864"
       - "50012:50010"
       - "50022:50020"
       - "50477:50475"
@@ -100,7 +100,7 @@ services:
 
   hdfs-namenode-1:
     build:
-      context: ./images/hdfs
+      context: ./images/hdfs/
       args:
         BASE_VERSION: ${HDFS_BASE_VERSION}
     image: radarbase/hdfs:${HDFS_BASE_VERSION}

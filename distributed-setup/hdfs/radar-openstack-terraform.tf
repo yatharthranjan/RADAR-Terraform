@@ -1,3 +1,10 @@
+variable "TERRAFORM_OPENSTACK_RADAR_SUBNET" {
+  default = ""
+}
+variable "TERRAFORM_OPENSTACK_RADAR_STATIC_IP" {
+  default = ""
+}
+
 provider "openstack" {
   user_name   = ""
   tenant_name = ""
@@ -21,7 +28,7 @@ resource "openstack_networking_router_interface_v2" "radar-router-interface" {
 resource "openstack_networking_subnet_v2" "radar-subnet" {
   name       = "myheathe-demo-subnet"
   network_id = "${openstack_networking_network_v2.radar-network.id}"
-  cidr       = "192.168.199.0/24"
+  cidr       = "${var.TERRAFORM_OPENSTACK_RADAR_SUBNET}"
   ip_version = 4
   dns_nameservers = ["8.8.8.8"]
 }
@@ -35,7 +42,7 @@ resource "openstack_networking_port_v2" "radar-ip" {
 
   fixed_ip {
     "subnet_id"  = "${openstack_networking_subnet_v2.radar-subnet.id}"
-    "ip_address" = "192.168.199.10"
+    "ip_address" = "${var.TERRAFORM_OPENSTACK_RADAR_STATIC_IP}"
   }
 }
 

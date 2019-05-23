@@ -34,7 +34,13 @@ resource "null_resource" "hdfs-namenode-1-provision" {
 
   provisioner "remote-exec" {
     inline = [
-      "cd ${var.HDFS_BASE_DIRECTORY} && docker-compose -f hdfs-compose.yml up -d hdfs-namenode-1"
+      "chmod +x ${var.HDFS_BASE_DIRECTORY}/images/hdfs/entrypoint.sh"
+    ]
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "cd ${var.HDFS_BASE_DIRECTORY} && sleep 100 && docker-compose -f hdfs-compose.yml up -d hdfs-namenode-1"
     ]
   }
 }
@@ -74,7 +80,13 @@ resource "null_resource" "hdfs-datanode-1-provision" {
 
   provisioner "remote-exec" {
     inline = [
-      "cd ${var.HDFS_BASE_DIRECTORY} && docker-compose -f hdfs-compose.yml up -d hdfs-datanode-1"
+      "chmod +x ${var.HDFS_BASE_DIRECTORY}/images/hdfs/entrypoint.sh"
+    ]
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "cd ${var.HDFS_BASE_DIRECTORY} && sleep 100 && docker-compose -f hdfs-compose.yml up -d hdfs-datanode-1"
     ]
   }
 }
@@ -114,7 +126,13 @@ resource "null_resource" "hdfs-datanode-2-provision" {
 
   provisioner "remote-exec" {
     inline = [
-      "cd ${var.HDFS_BASE_DIRECTORY} && docker-compose -f hdfs-compose.yml up -d hdfs-datanode-2"
+      "chmod +x ${var.HDFS_BASE_DIRECTORY}/images/hdfs/entrypoint.sh"
+    ]
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "cd ${var.HDFS_BASE_DIRECTORY} && sleep 100 && docker-compose -f hdfs-compose.yml up -d hdfs-datanode-2"
     ]
   }
 }
@@ -153,7 +171,13 @@ resource "null_resource" "hdfs-datanode-3-provision" {
 
   provisioner "remote-exec" {
     inline = [
-      "cd ${var.HDFS_BASE_DIRECTORY} && docker-compose -f hdfs-compose.yml up -d hdfs-datanode-3"
+      "chmod +x ${var.HDFS_BASE_DIRECTORY}/images/hdfs/entrypoint.sh"
+    ]
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "cd ${var.HDFS_BASE_DIRECTORY} && sleep 100 && docker-compose -f hdfs-compose.yml up -d hdfs-datanode-3"
     ]
   }
 }
