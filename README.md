@@ -3,7 +3,7 @@ Deployment and Orchestration of the RADAR-base platform using Terraform
 # Configurations
 The Following Configurations to deploy are provided -
 
-## Distributed HDFS
+## Distributed HDFS (`distributed-setup/hdfs/`)
 This configuration is provided with a distributed HDFS setup. 3 instances for datanodes and 1 instance for namenode.
 And 1 large instance for all other RADAR components. The provided configuration is for resources on OpenStack but can be easily reciprocated for AWS and GCP.
 
@@ -30,18 +30,20 @@ Instance sizes can be easily changed by changing the respective instance resourc
 
 3. Set the variable in .env file for configuration of HDFS docker containers
 
-4. Initialise terraform in the directory
+4. Follow the Configuration option for other RADAR components as mentioned in `distributed-setup/hdfs/radar-cp-stack/README.md`
+
+5. Initialise terraform in the directory
     ```sh
       cd distributed-setup/hdfs
       terraform init
     ```
-5. Run terraform plan to dry run your setup
+6. Run terraform plan to dry run your setup
     ```sh
-      terraform plan
+      terraform plan -var-file="env.tfvars" -out=tf.plan
     ```
-6. Apply the terraform plan
+7. Apply the terraform plan
     ```sh
-      terraform apply -var-file="env.tfvars"
+      terraform apply "tf.plan"
     ```
 
 ### Optional

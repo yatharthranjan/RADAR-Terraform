@@ -1,0 +1,8 @@
+{
+  "log-opts": {
+    "max-size": "30m",
+    "max-file": "7"
+  },
+  "live-restore": true,
+  "mtu": 1450
+}

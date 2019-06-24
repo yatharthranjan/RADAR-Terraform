@@ -55,10 +55,10 @@ services:
       HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
       HADOOP_DFS_REPLICATION: 2
     ports:
-      - "9867:9864"
-      - "50011:50010"
-      - "50021:50020"
-      - "50476:50475"
+      - "9864:9864"
+      - "50010:50010"
+      - "50020:50020"
+      - "50475:50475"
     extra_hosts:
       - "hdfs-namenode-1:${TERRAFORM_OPENSTACK_HDFS_NAMENODE_1_STATIC_IP}"
     healthcheck:
@@ -86,10 +86,10 @@ services:
       HADOOP_NAMENODE1_HOSTNAME: hdfs-namenode-1
       HADOOP_DFS_REPLICATION: 2
     ports:
-      - "9868:9864"
-      - "50012:50010"
-      - "50022:50020"
-      - "50477:50475"
+      - "9864:9864"
+      - "50010:50010"
+      - "50020:50020"
+      - "50475:50475"
     extra_hosts:
       - "hdfs-namenode-1:${TERRAFORM_OPENSTACK_HDFS_NAMENODE_1_STATIC_IP}"
     healthcheck:

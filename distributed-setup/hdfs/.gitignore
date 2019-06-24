@@ -1,6 +1,7 @@
 .terraform
 *.tfstate
 *.tfstate.backup
+*.plan
 
 remote-state.tf
 aws-secret.tfvars
